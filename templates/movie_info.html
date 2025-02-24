@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ year }}년 영화 TOP 10</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #333;
+            color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #555;
+            text-align: center;
+        }
+        th {
+            background-color: #ff4500;
+            color: white;
+        }
+        tr:hover {
+            background-color: #444;
+        }
+        img {
+            width: 100px;
+            border-radius: 5px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ff4500;
+            font-size: 1.2em;
+            border: 1px solid #ff4500;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        a:hover {
+            background-color: #ff4500;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ year }}년 매출 TOP 10 영화</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>순위</th>
+                <th>포스터</th>
+                <th>제목</th>
+                <th>정보</th>
+                <th>OTT</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie in movies %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><img src="{{ movie.poster }}" alt="{{ movie.title }}"></td>
+                <td><strong>{{ movie.title }}</strong></td>
+                <td>{{ movie.info }}</td>
+                <td>{{ movie.OTT }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/">뒤로가기</a>
+
+</body>
+</html>

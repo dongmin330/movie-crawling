@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ movie.title }} - 검색 결과</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .info {
+            background-color: #333;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            max-width: 600px; /* 테이블과 동일한 크기로 조정 */
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify; /* 가독성을 위한 정렬 */
+        }
+        .info p {
+            margin: 10px 0;
+            word-wrap: break-word; /* 긴 설명 자동 줄바꿈 */
+        }
+        table {
+            max-width: 1200px; /* 테이블 크기 조정 */
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #333;
+            color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #555;
+            text-align: center;
+        }
+        th {
+            background-color: #ff4500;
+            color: white;
+        }
+        tr:hover {
+            background-color: #444;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #ff4500;
+            font-size: 1.2em;
+            border: 1px solid #ff4500;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        a:hover {
+            background-color: #ff4500;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ movie.title }} 정보</h1>
+    
+    <!-- 포스터 이미지 -->
+    <img src="{{ movie.poster }}" alt="포스터" width="200">
+
+    <table>
+        <tr><th>장르</th></tr>
+        <tr><td>{{ movie.genre }}</td></tr>
+        <tr><th>설명</th></tr>
+        <tr><td>{{ movie.description }}</td></tr>
+
+    </table>
+
+    <!-- OTT 정보 -->
+    <h2>OTT 서비스</h2>
+    <table border="1">
+        <tr>
+            <th>플랫폼</th>
+            <th>링크</th>
+            <th>가격</th>
+        </tr>
+        {% if movie.ott_names %}
+            {% for i in range(movie.ott_names|length) %}
+            <tr>
+                <td>{{ movie.ott_names[i] }}</td>
+                <td><a href="{{ movie.ott_links[i] }}" target="_blank">보러가기</a></td>
+                <td>{{ movie.ott_prices[i] }}</td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">OTT 정보가 없습니다.</td>
+            </tr>
+        {% endif %}
+    </table>
+
+    <br>
+    <a href="/">뒤로가기</a>
+</body>
+</html>
